@@ -36,6 +36,27 @@ contract TodosContract {
     task_to_owner[task_id] =msg.sender;
     emit event_add_task(msg.sender, task_id); 
   }
+    function get_all_tasks() external view returns (Task[] memory){
+     Task[] memory temporary=new Task[](tasks.length);
+     uint counter=0;
+     for(uint i=0; i<tasks.length; i++){
+       if(task_to_owner[i]==msg.sender && tasks[i].is_deleted==false){
+         temporary[counter]=tasks[i];
+         counter++;
+       }
+     }
+    Task[] memory result=new Task[](counter);
+    for(uint i=0; i<counter; i++){
+      result[i]=temporary[i];
+    }
+    return result;
+  }
 
+  function delete_task(uint task_id, bool is_deleted) external{
+    if(task_to_owner[task_id]==msg.sender){
+      tasks[task_id].is_deleted=is_deleted;
+      emit event_delete_task(task_id, is_deleted);
+    }
+  }
 
 }
