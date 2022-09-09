@@ -18,6 +18,8 @@ export default function Home() {
     const [correctNetwork, setCorrectNetwork]=useState(false);
     const [isUserLoggedIn, setIsUserLoggedIn]=useState(false);
   const [currentAccount, setCurrentAccount]=useState('');
+  const[todo, setTodo]=useState('');
+  const [todos, setTodos]=useState([]);
   // Calls Metamask to connect wallet on clicking Connect Wallet button
   const connectWallet = async () => {
      try{
@@ -51,7 +53,31 @@ export default function Home() {
 
   // Add tasks from front-end onto the blockchain
   const addTask = async e => {
-
+      e.preventDefault();
+    let todo={
+       TodoText:input,
+       isDeleted: false
+    }
+    try{
+      const {ethereum}=window;
+      if(ethereum){
+        const provider=new ethers.providers.Web3Provider(ethereum);
+        const signer=provider.getSigner();
+        const TaskContract=new ethers.Contract(
+          TaskContractAddress, Task.abi, signer
+        )
+        TaskContract.addTask(task.taskText, task.isDeleted).then(res=>{
+          setTodos([...todos, task])
+        })
+        .catch(err=>{
+          console.log(err);
+        })
+      }else{
+        console.log('ethereum object doesnot exist')
+      }
+    }catch(e){
+      console.log(e);
+    }
   }
 
   // Remove tasks from front-end by filtering it out on our "back-end" / blockchain smart contract
