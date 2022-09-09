@@ -1,5 +1,5 @@
-const TaskContract = artifacts.require("TaskContract");
+const TodosContract = artifacts.require("TodosContract");
 
 module.exports = function (deployer) {
-  deployer.deploy(TaskContract);
+  deployer.deploy(TodosContract);
 };

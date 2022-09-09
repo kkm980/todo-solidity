@@ -1,0 +1,1 @@
+export const todos_contract_address='0x8f1535DD2b6124d714608916d2e04FA2E74E590F'

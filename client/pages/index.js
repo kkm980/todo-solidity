@@ -1,6 +1,8 @@
 import WrongNetworkMessage from '../components/WrongNetworkMessage'
 import ConnectWalletButton from '../components/ConnectWalletButton'
 import TodoList from '../components/TodoList'
+import {todos_contract_address} from '../config.js'
+import TodosAbi from '../../smart_contract/build/contracts/TodosContract.json'
 
 /* 
 const tasks = [
