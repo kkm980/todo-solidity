@@ -1,7 +1,7 @@
 import Navbar from './Navbar'
 import { IoMdAddCircle } from 'react-icons/io'
 
-const TodoList = () => <div className='w-[70%] bg-[#354ea3] py-4 px-9 rounded-[30px] overflow-y-scroll'>
+const TodoList = ({setInput,input, addTask}) => <div className='w-[70%] bg-[#354ea3] py-4 px-9 rounded-[30px] overflow-y-scroll'>
   <Navbar />
   <h2 className='text-4xl bolder text-[#edae67] pb-8'>
     Hi Krishna!
@@ -11,10 +11,15 @@ const TodoList = () => <div className='w-[70%] bg-[#354ea3] py-4 px-9 rounded-[3
     <input
       className='rounded-[10px] w-full p-[10px] border-none outline-none bg-[#031956] text-white mb-[10px]'
       placeholder='Add a task here...'
+      onChange={(e)=>{
+        setInput(e.target.value)
+      }}
+      value={input}
       // take input from the form here
     />
     <IoMdAddCircle
       // Add an onClick method
+      onClick={addTask}
       className='text-[#ea0aff] text-[50px] cursor-pointer ml-[20px] mb-[10px] hover:text-[blue]'
     />
   </form>
